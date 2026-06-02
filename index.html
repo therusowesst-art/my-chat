@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juanito AHUEVO</title>
-    <!-- Cargamos Firebase desde la nube -->
+
+    <script>
+        // ========================================================
+        // SISTEMA DE SEGURIDAD OBLIGATORIO (Al inicio del HEAD)
+        // ========================================================
+        (function() {
+            var contrasenaCorrecta = "i love mexico";
+            var intento = prompt("Por seguridad, introduce la contraseña para acceder a Juanito Web:");
+
+            if (intento !== contrasenaCorrecta) {
+                alert("Contraseña incorrecta. Acceso denegado.");
+                window.location.replace("about:blank"); // Bloquea y limpia la pestaña
+            } else {
+                alert("¡Acceso concedido! Bienvenido, crack.");
+            }
+        })();
+    </script>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -207,37 +224,18 @@
 </head>
 <body>
 
-    <script>
-        // ========================================================
-        // SITEMA DE SEGURIDAD PARA ENTRAR
-        // ========================================================
-        var contrasenaCorrecta = "i love mexico"; // <-- Nueva contraseña establecida
-        
-        var intento = prompt("Por seguridad, introduce la contraseña para acceder a Juanito Web:");
-
-        if (intento !== contrasenaCorrecta) {
-            alert("Contraseña incorrecta. Acceso denegado.");
-            window.location.href = "about:blank"; // Te saca de la página si fallas
-        } else {
-            alert("¡Acceso concedido! Bienvenido, crack.");
-        }
-    </script>
-
     <h1>Juanito Web Premium</h1>
 
-    <!-- Contenedor del Juego -->
     <div class="contenedor-juego">
         <iframe src="https://www.hoodamath.com"></iframe>
     </div>
 
-    <!-- Botones de Volumen del Juego -->
     <div class="barra-volumen">
         <button class="btn-vol" onclick="alert('Usa los controles dentro del menú del juego para bajar el volumen')">🔉 Vol -</button>
         <button class="btn-vol" onclick="alert('Puedes mutar el juego desde la pestaña de tu navegador dándole clic derecho -> Silenciar sitio web')">🔇 Mutar</button>
         <button class="btn-vol" onclick="alert('Aumenta el volumen general desde tu PC o el menú interno del juego')">🔊 Vol +</button>
     </div>
 
-    <!-- Contenedor del Chat -->
     <div class="contenedor-chat">
         <div id="caja-mensajes"></div>
 
@@ -247,32 +245,27 @@
         </div>
     </div>
 
-    <!-- SECCIÓN DE MÚSICA CON TUS REPRODUCTORES REALES -->
     <div class="contenedor-musica">
         <h3 style="color: #7FDBFF; margin-top: 0; margin-bottom: 5px;">🎵 Radio & Lista Musical Premium</h3>
         <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Disfruta de tus temas favoritos uno debajo del otro</p>
         
         <div class="lista-videos">
             
-            <!-- Video 1 -->
             <div class="video-item">
                 <h4>🔥 Video 1</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/UaFCPHwZMpI" allowfullscreen></iframe>
             </div>
 
-            <!-- Video 2 -->
             <div class="video-item">
                 <h4>🔥 Video 2</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/SFVQkYTE5xQ" allowfullscreen></iframe>
             </div>
 
-            <!-- Video 3 -->
             <div class="video-item">
                 <h4>🔥 Video 3</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/Vee0Wth6Iws" allowfullscreen></iframe>
             </div>
 
-            <!-- Video 4 -->
             <div class="video-item">
                 <h4>🔥 Video 4</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/Z6NzwMif0fA" allowfullscreen></iframe>
@@ -280,14 +273,12 @@
 
         </div>
 
-        <!-- Botones globales de control visual abajo de la lista -->
         <div class="barra-volumen" style="border-color: rgba(127, 219, 255, 0.3); margin-bottom: 15px;">
             <button class="btn-vol azul" onclick="alert('Usa la barra de volumen nativa que aparece abajo de cada reproductor')">🔉 Vol -</button>
             <button class="btn-vol azul" onclick="alert('Dale clic al icono de la bocina dentro del reproductor para mutar ese video')">🔇 Mutar</button>
             <button class="btn-vol azul" onclick="alert('Ajusta el volumen individual en la barra blanca de cada pantalla de YouTube')">🔊 Vol +</button>
         </div>
 
-        <!-- Botón para abrir YouTube Music -->
         <p style="font-size: 0.9rem; color: #aaa; margin: 0 0 10px 0;">¿Quieres tus playlists completas? Ábrelo aquí:</p>
         <a href="https://music.youtube.com" target="_blank" class="btn-yt-music">
             🚀 Abrir YouTube Music Oficial
