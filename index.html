@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juanito Web Premium</title>
+    
+    <!-- Librerías de Google Firebase (Intactas) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        /* Fondo Color Azul Tipo Rayo / Eléctrico Neón y Letras Rojas */
+        body {
+            font-family: 'Arial Black', Gadget, sans-serif;
+            background: linear-gradient(135deg, #00d2ff 0%, #0066ff 50%, #001133 100%);
+            background-attachment: fixed;
+            color: #ff0000;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        /* Título Juanito */
+        h1 {
+            font-size: 50px;
+            color: #ff0000;
+            text-shadow: 0px 0px 15px #ff3333, 0px 0px 30px #000;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        p { 
+            color: #ffffff; 
+            font-size: 18px; 
+            font-weight: bold;
+            text-shadow: 1px 1px 5px #000;
+        }
+        
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* El Cuadrito con el juego directo de Hooda Math que sí funciona */
+        iframe {
+            width: 85%;
+            height: 550px;
+            border: 5px solid #ff0000;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px #ff0000;
+            background-color: #000;
+        }
+        /* Caja de Chat (Sin tocarle nada) */
+        .chat-container {
+            width: 85%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ff0000;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+            text-align: left;
+        }
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            background-color: #001133;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            font-family: monospace;
+        }
+        .msg { margin-bottom: 8px; }
+        .user { color: #00ffff; font-weight: bold; }
+        .text { color: #ff6666; }
+        .chat-input-area { display: flex; gap: 10px; }
+        .chat-input-area input {
+            flex: 1; padding: 10px; background-color: #222;
+            border: 1px solid #ff0000; color: white; border-radius: 5px;
+        }
+        .chat-input-area button {
+            padding: 10px 20px; background-color: #ff0000;
+            color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>juanito</h1>
+    <p>🕹️ Hooda Math Games & Chat en Vivo ⚡</p>
+
+    <div class="main-container">
+        <!-- Servidor directo de juego de Hooda Math (Evita la pantalla negra) -->
+        <iframe id="reproductor" src="https://www.hoodamath.com/games/carrush.html" title="Hooda Math Juego Fijo"></iframe>
+
+        <!-- Chat Satelital (Intacto) -->
+        <div class="chat-container">
+            <div class="chat-messages" id="chatBox"></div>
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="Tu Apodo..." style="max-width: 150px; border-color: #00ffff;">
+                <input type="text" id="chatInput" placeholder="Escribe tu mensaje aquí...">
+                <button onclick="enviarMensaje()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tus credenciales reales de Firebase ("pagina yellow")
+        const firebaseConfig = {
+            apiKey: "AIzaSyDcLm48oGpY4-gF-VBPwOcfTSHniWQ_KSI",
+            authDomain: "pagina-yellow.firebaseapp.com",
+            databaseURL: "https://pagina-yellow-default-rtdb.firebaseio.com",
+            projectId: "pagina-yellow",
+            storageBucket: "pagina-yellow.appspot.com",
+            messagingSenderId: "908196257959",
+            appId: "1:908196257959:web:ecf110e98ecdbe5778c812"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Lógica del Chat (Sin modificaciones)
+        database.ref("mensajes").on("child_added", function(snapshot) {
+            let datos = snapshot.val();
+            let chatBox = document.getElementById('chatBox');
+            
+            let nuevoMensaje = document.createElement('div');
+            nuevoMensaje.classList.add('msg');
+            nuevoMensaje.innerHTML = `<span class="user">[${datos.usuario}]:</span> <span class="text">${datos.texto}</span>`;
+            
+            chatBox.appendChild(nuevoMensaje);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        function enviarMensaje() {
+            let inputTexto = document.getElementById('chatInput');
+            let inputUser = document.getElementById('userInput');
+            
+            let texto = inputTexto.value.trim();
+            let usuario = inputUser.value.trim() || "Anónimo";
+
+            if (texto === "") return;
+
+            database.ref("mensajes").push().set({
+                usuario: usuario,
+                texto: texto
+            });
+
+            inputTexto.value = "";
+        }
+
+        document.getElementById('chatInput').addEventListener("keyup", function(e) {
+            if (e.key === "Enter") enviarMensaje();
+        });
+    </script>
+
+</body>
+</html>
