@@ -4,107 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juanito Web Premium</title>
-    
-    <!-- Librerías de Google Firebase (Intactas) -->
+    <!-- Cargamos Firebase desde la nube -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        /* Fondo Color Azul Tipo Rayo / Eléctrico Neón y Letras Rojas */
         body {
-            font-family: 'Arial Black', Gadget, sans-serif;
-            background: linear-gradient(135deg, #00d2ff 0%, #0066ff 50%, #001133 100%);
-            background-attachment: fixed;
-            color: #ff0000;
+            background: linear-gradient(135deg, #001f3f, #0074D9);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
             margin: 0;
             padding: 20px;
-            text-align: center;
         }
-        /* Título Juanito */
+
         h1 {
-            font-size: 50px;
-            color: #ff0000;
-            text-shadow: 0px 0px 15px #ff3333, 0px 0px 30px #000;
-            margin-bottom: 5px;
-            text-transform: uppercase;
+            color: #FF4136;
+            text-shadow: 0px 0px 15px rgba(255, 65, 54, 0.8);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
-        p { 
-            color: #ffffff; 
-            font-size: 18px; 
-            font-weight: bold;
-            text-shadow: 1px 1px 5px #000;
-        }
-        
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        /* El Cuadrito con el juego directo de Hooda Math que sí funciona */
-        iframe {
-            width: 85%;
-            height: 550px;
-            border: 5px solid #ff0000;
+
+        .contenedor-juego {
+            border: 4px solid #FF4136;
+            box-shadow: 0px 0px 20px #FF4136;
             border-radius: 15px;
-            box-shadow: 0px 0px 30px #ff0000;
-            background-color: #000;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto 10px auto;
+            background: #000000;
         }
-        /* Caja de Chat (Sin tocarle nada) */
-        .chat-container {
-            width: 85%;
-            background: rgba(0, 0, 0, 0.8);
-            border: 3px solid #ff0000;
+
+        iframe {
+            width: 100%;
+            height: 550px;
+            border: none;
+            display: block;
+            background: #000000;
+        }
+
+        .barra-volumen {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 65, 54, 0.3);
+        }
+
+        .btn-vol {
+            background: #111;
+            color: #fff;
+            border: 2px solid #FF4136;
+            padding: 6px 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            box-shadow: 0px 0px 5px rgba(255, 65, 54, 0.5);
+        }
+
+        .btn-vol:hover {
+            background: #FF4136;
+            color: black;
+            box-shadow: 0px 0px 10px #FF4136;
+        }
+
+        .btn-vol.azul {
+            border-color: #7FDBFF;
+            box-shadow: 0px 0px 5px rgba(127, 219, 255, 0.5);
+        }
+
+        .btn-vol.azul:hover {
+            background: #7FDBFF;
+            color: black;
+            box-shadow: 0px 0px 10px #7FDBFF;
+        }
+
+        .contenedor-chat {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            background: rgba(0, 0, 0, 0.75);
+            border: 3px solid #FF4136;
+            box-shadow: 0px 0px 15px rgba(255, 65, 54, 0.5);
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
-            text-align: left;
         }
-        .chat-messages {
-            height: 200px;
+
+        #caja-mensajes {
+            height: 250px;
             overflow-y: auto;
-            background-color: #001133;
-            border: 1px solid #ff0000;
+            border: 1px solid #FF4136;
+            border-radius: 8px;
             padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            color: #fff;
+            text-align: left;
+            background: #050505;
+            margin-bottom: 15px;
+        }
+
+        .mensaje {
+            margin-bottom: 8px;
             font-family: monospace;
+            font-size: 1.1rem;
         }
-        .msg { margin-bottom: 8px; }
-        .user { color: #00ffff; font-weight: bold; }
-        .text { color: #ff6666; }
-        .chat-input-area { display: flex; gap: 10px; }
-        .chat-input-area input {
-            flex: 1; padding: 10px; background-color: #222;
-            border: 1px solid #ff0000; color: white; border-radius: 5px;
+
+        .usuario {
+            color: #7FDBFF;
+            font-weight: bold;
         }
-        .chat-input-area button {
-            padding: 10px 20px; background-color: #ff0000;
-            color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer;
+
+        .texto {
+            color: #FF4136;
+        }
+
+        .controles {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            background: #111;
+            border: 2px solid #7FDBFF;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        input:disabled {
+            background: #222;
+            border-color: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        #userInput { width: 30%; }
+        #textInput { width: 70%; }
+
+        /* Contenedor de la lista de música */
+        .contenedor-musica {
+            max-width: 800px;
+            margin: 20px auto;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #7FDBFF;
+            box-shadow: 0px 0px 15px #7FDBFF;
+            border-radius: 12px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .lista-videos {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .video-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(127, 219, 255, 0.2);
+        }
+
+        .video-item h4 {
+            margin: 0 0 8px 0;
+            color: #7FDBFF;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .video-iframe {
+            width: 100%;
+            height: 220px;
+            border-radius: 6px;
+            border: none;
+            display: block;
+        }
+
+        .btn-yt-music {
+            display: inline-block;
+            background: #FF4136;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            box-shadow: 0px 0px 10px #FF4136;
+            transition: 0.2s;
+            margin-top: 5px;
+        }
+
+        .btn-yt-music:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px #FF4136;
         }
     </style>
 </head>
 <body>
 
-    <h1>juanito</h1>
-    <p>🕹️ Hooda Math Games & Chat en Vivo ⚡</p>
+    <h1>Juanito Web Premium</h1>
 
-    <div class="main-container">
-        <!-- Servidor directo de juego de Hooda Math (Evita la pantalla negra) -->
-        <iframe id="reproductor" src="https://www.hoodamath.com/games/carrush.html" title="Hooda Math Juego Fijo"></iframe>
+    <!-- Contenedor del Juego -->
+    <div class="contenedor-juego">
+        <iframe src="https://www.hoodamath.com"></iframe>
+    </div>
 
-        <!-- Chat Satelital (Intacto) -->
-        <div class="chat-container">
-            <div class="chat-messages" id="chatBox"></div>
-            <div class="chat-input-area">
-                <input type="text" id="userInput" placeholder="Tu Apodo..." style="max-width: 150px; border-color: #00ffff;">
-                <input type="text" id="chatInput" placeholder="Escribe tu mensaje aquí...">
-                <button onclick="enviarMensaje()">Enviar</button>
-            </div>
+    <!-- Botones de Volumen del Juego -->
+    <div class="barra-volumen">
+        <button class="btn-vol" onclick="alert('Usa los controles dentro del menú del juego para bajar el volumen')">🔉 Vol -</button>
+        <button class="btn-vol" onclick="alert('Puedes mutar el juego desde la pestaña de tu navegador dándole clic derecho -> Silenciar sitio web')">🔇 Mutar</button>
+        <button class="btn-vol" onclick="alert('Aumenta el volumen general desde tu PC o el menú interno del juego')">🔊 Vol +</button>
+    </div>
+
+    <!-- Contenedor del Chat -->
+    <div class="contenedor-chat">
+        <div id="caja-mensajes"></div>
+
+        <div class="controles">
+            <input type="text" id="userInput" placeholder="Tu Apodo...">
+            <input type="text" id="textInput" placeholder="Escribe tu mensaje aquí y presiona Enter...">
         </div>
+    </div>
+
+    <!-- SECCIÓN DE MÚSICA CON TUS REPRODUCTORES REALES -->
+    <div class="contenedor-musica">
+        <h3 style="color: #7FDBFF; margin-top: 0; margin-bottom: 5px;">🎵 Radio & Lista Musical Premium</h3>
+        <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Disfruta de tus temas favoritos uno debajo del otro</p>
+        
+        <div class="lista-videos">
+            
+            <!-- Video 1 -->
+            <div class="video-item">
+                <h4>🔥 Video 1</h4>
+                <iframe class="video-iframe" src="https://www.youtube.com/embed/UaFCPHwZMpI" allowfullscreen></iframe>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-item">
+                <h4>🔥 Video 2</h4>
+                <iframe class="video-iframe" src="https://www.youtube.com/embed/SFVQkYTE5xQ" allowfullscreen></iframe>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-item">
+                <h4>🔥 Video 3</h4>
+                <iframe class="video-iframe" src="https://www.youtube.com/embed/Vee0Wth6Iws" allowfullscreen></iframe>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-item">
+                <h4>🔥 Video 4</h4>
+                <iframe class="video-iframe" src="https://www.youtube.com/embed/Z6NzwMif0fA" allowfullscreen></iframe>
+            </div>
+
+        </div>
+
+        <!-- Botones globales de control visual abajo de la lista -->
+        <div class="barra-volumen" style="border-color: rgba(127, 219, 255, 0.3); margin-bottom: 15px;">
+            <button class="btn-vol azul" onclick="alert('Usa la barra de volumen nativa que aparece abajo de cada reproductor')">🔉 Vol -</button>
+            <button class="btn-vol azul" onclick="alert('Dale clic al icono de la bocina dentro del reproductor para mutar ese video')">🔇 Mutar</button>
+            <button class="btn-vol azul" onclick="alert('Ajusta el volumen individual en la barra blanca de cada pantalla de YouTube')">🔊 Vol +</button>
+        </div>
+
+        <!-- Botón para abrir YouTube Music -->
+        <p style="font-size: 0.9rem; color: #aaa; margin: 0 0 10px 0;">¿Quieres tus playlists completas? Ábrelo aquí:</p>
+        <a href="https://music.youtube.com" target="_blank" class="btn-yt-music">
+            🚀 Abrir YouTube Music Oficial
+        </a>
     </div>
 
     <script>
@@ -118,45 +290,69 @@
             messagingSenderId: "908196257959",
             appId: "1:908196257959:web:ecf110e98ecdbe5778c812"
         };
-
-        // Inicializar Firebase
+        
+        // Inicializamos Firebase
         firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        const db = firebase.database().ref("mensajes_chat");
 
-        // Lógica del Chat (Sin modificaciones)
-        database.ref("mensajes").on("child_added", function(snapshot) {
-            let datos = snapshot.val();
-            let chatBox = document.getElementById('chatBox');
-            
-            let nuevoMensaje = document.createElement('div');
-            nuevoMensaje.classList.add('msg');
-            nuevoMensaje.innerHTML = `<span class="user">[${datos.usuario}]:</span> <span class="text">${datos.texto}</span>`;
-            
-            chatBox.appendChild(nuevoMensaje);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
+        // Elementos HTML
+        const cajaMensajes = document.getElementById("caja-mensajes");
+        const userInput = document.getElementById("userInput");
+        const textInput = document.getElementById("textInput");
 
+        // MEMORIA DE NOMBRE
+        window.onload = function() {
+            let nombreGuardado = localStorage.getItem('apodoGamer');
+            if (nombreGuardado) {
+                userInput.value = nombreGuardado;
+                userInput.disabled = true;
+            }
+        };
+
+        // Función para enviar mensajes
         function enviarMensaje() {
-            let inputTexto = document.getElementById('chatInput');
-            let inputUser = document.getElementById('userInput');
+            let usuario = userInput.value.trim() || "Anónimo";
+            let textoMensaje = textInput.value.trim();
             
-            let texto = inputTexto.value.trim();
-            let usuario = inputUser.value.trim() || "Anónimo";
+            if (!textoMensaje) return;
 
-            if (texto === "") return;
+            if (usuario !== "Anónimo" && !localStorage.getItem('apodoGamer')) {
+                localStorage.setItem('apodoGamer', usuario);
+                userInput.disabled = true;
+            }
 
-            database.ref("mensajes").push().set({
+            db.push({
                 usuario: usuario,
-                texto: texto
+                texto: textoMensaje,
+                tiempo: Date.now()
             });
 
-            inputTexto.value = "";
+            textInput.value = "";
         }
 
-        document.getElementById('chatInput').addEventListener("keyup", function(e) {
-            if (e.key === "Enter") enviarMensaje();
+        textInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                enviarMensaje();
+            }
+        });
+
+        db.limitToLast(50).on("child_added", function(snapshot) {
+            let datos = snapshot.val();
+            
+            if (datos.texto === '/clear-names') {
+                localStorage.removeItem('apodoGamer');
+                userInput.value = '';
+                userInput.disabled = false;
+                return;
+            }
+            
+            let divMsg = document.createElement("div");
+            divMsg.className = "mensaje";
+            divMsg.innerHTML = `<span class="usuario">[${datos.usuario}]:</span> <span class="texto">${datos.texto}</span>`;
+            
+            cajaMensajes.appendChild(divMsg);
+            cajaMensajes.scrollTop = cajaMensajes.scrollHeight;
         });
     </script>
-
 </body>
 </html>
