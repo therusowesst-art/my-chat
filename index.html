@@ -145,7 +145,6 @@
         #userInput { width: 30%; }
         #textInput { width: 70%; }
 
-        /* Contenedor de la lista de música */
         .contenedor-musica {
             max-width: 800px;
             margin: 20px auto;
@@ -207,6 +206,22 @@
     </style>
 </head>
 <body>
+
+    <script>
+        // ========================================================
+        // SITEMA DE SEGURIDAD PARA ENTRAR
+        // ========================================================
+        var contrasenaCorrecta = "i love mexico"; // <-- Nueva contraseña establecida
+        
+        var intento = prompt("Por seguridad, introduce la contraseña para acceder a Juanito Web:");
+
+        if (intento !== contrasenaCorrecta) {
+            alert("Contraseña incorrecta. Acceso denegado.");
+            window.location.href = "about:blank"; // Te saca de la página si fallas
+        } else {
+            alert("¡Acceso concedido! Bienvenido, crack.");
+        }
+    </script>
 
     <h1>Juanito Web Premium</h1>
 
