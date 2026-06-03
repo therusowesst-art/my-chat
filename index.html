@@ -6,20 +6,20 @@
     <title>Yellow</title>
 
     <script>
-        // ========================================================
-        // SISTEMA DE SEGURIDAD OBLIGATORIO (Al inicio del HEAD)
-        // ========================================================
-        (function() {
-            var contrasenaCorrecta = "1998";
-            var intento = prompt("Por seguridad, introduce la contraseña para acceder a yellow web:");
+        // ========================================================
+        // SISTEMA DE SEGURIDAD OBLIGATORIO (Al inicio del HEAD)
+        // ========================================================
+        (function() {
+            var contrasenaCorrecta = "1998";
+            var intento = prompt("Por seguridad, introduce la contraseña para acceder a yellow web:");
 
-            if (intento !== contrasenaCorrecta) {
-                alert("Contraseña incorrecta. Acceso denegado consige tu key.");
-                window.location.replace("about:blank"); // Bloquea y limpia la pestaña
-            } else {
-                alert("¡Acceso concedido! Bienvenido.");
-            }
-        })();
+            if (intento !== contrasenaCorrecta) {
+                alert("Contraseña incorrecta. Acceso denegado consige tu key.");
+                window.location.replace("about:blank"); // Bloquea y limpia la pestaña
+            } else {
+                alert("¡Acceso concedido! Bienvenido.");
+            }
+        })();
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -220,6 +220,28 @@
             transform: scale(1.05);
             box-shadow: 0px 0px 15px #FF4136;
         }
+
+        /* ESTILO DEL BOTÓN DE EMERGENCIA FLOTANTE */
+        .btn-emergencia {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: 0.2s;
+        }
+
+        .btn-emergencia:hover {
+            background: #FF4136;
+            color: white;
+            border-color: #FF4136;
+        }
     </style>
 </head>
 <body>
@@ -273,7 +295,7 @@
 
              <div class="video-item">
                 <h5>🔥 Video 1</h5>
-                <iframe class="video-iframe" src="https://youtu.be/c3YOJ4jBMrg?list=RDc3YOJ4jBMrg" allowfullscreen></iframe>
+                <iframe class="video-iframe" src="https://www.youtube.com/embed/c3YOJ4jBMrg" allowfullscreen></iframe>
             </div>
 
         </div>
@@ -289,6 +311,8 @@
             🚀 Abrir YouTube Music Oficial
         </a>
     </div>
+
+    <button class="btn-emergencia" onclick="window.location.replace('about:blank');">❌ Enlace roto</button>
 
     <script>
         // Tus credenciales reales de Firebase ("pagina yellow")
