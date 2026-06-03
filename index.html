@@ -97,7 +97,7 @@
         }
 
         .btn-vol.azul:hover {
-            background: #7FFFDB;
+            background: #7FDBFF;
             color: black;
             box-shadow: 0px 0px 10px #7FDBFF;
         }
@@ -183,7 +183,7 @@
 
         .video-item {
             background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid rgba(127, 219, 255, 0.2);
         }
@@ -195,9 +195,12 @@
             font-size: 1rem;
         }
 
-        audio {
+        .video-iframe {
             width: 100%;
-            margin-top: 5px;
+            height: 220px;
+            border-radius: 6px;
+            border: none;
+            display: block;
         }
 
         .btn-yt-music {
@@ -250,42 +253,27 @@
              
             <div class="video-item">
                 <h4>🔥 Video 1</h4>
-                <audio controls>
-                    <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/UaFCPHwZMpI.mp3" type="audio/mpeg">
-                    Tu navegador no soporta este reproductor.
-                </audio>
+                <iframe class="video-iframe" src="https://invidious.perennialte.ch/embed/UaFCPHwZMpI" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
                 <h4>🔥 Video 2</h4>
-                <audio controls>
-                    <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/SFVQkYTE5xQ.mp3" type="audio/mpeg">
-                    Tu navegador no soporta este reproductor.
-                </audio>
+                <iframe class="video-iframe" src="https://invidious.perennialte.ch/embed/SFVQkYTE5xQ" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
                 <h4>🔥 Video 3</h4>
-                <audio controls>
-                    <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/Vee0Wth6Iws.mp3" type="audio/mpeg">
-                    Tu navegador no soporta este reproductor.
-                </audio>
+                <iframe class="video-iframe" src="https://invidious.perennialte.ch/embed/Vee0Wth6Iws" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
                 <h4>🔥 Video 4</h4>
-                <audio controls>
-                    <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/Z6NzwMif0fA.mp3" type="audio/mpeg">
-                    Tu navegador no soporta este reproductor.
-                </audio>
+                <iframe class="video-iframe" src="https://invidious.perennialte.ch/embed/Z6NzwMif0fA" allowfullscreen></iframe>
             </div>
 
              <div class="video-item">
                 <h5>🔥 Video 5</h5>
-                <audio controls>
-                    <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/Monalisa.mp3" type="audio/mpeg">
-                    Tu navegador no soporta este reproductor.
-                </audio>
+                <iframe class="video-iframe" src="https://invidious.perennialte.ch/embed/c3YOJ4jBMrg" allowfullscreen></iframe>
             </div>
 
         </div>
@@ -293,7 +281,7 @@
         <div class="barra-volumen" style="border-color: rgba(127, 219, 255, 0.3); margin-bottom: 15px;">
             <button class="btn-vol azul" onclick="alert('Usa la barra de volumen nativa que aparece abajo de cada reproductor')">🔉 Vol -</button>
             <button class="btn-vol azul" onclick="alert('Dale clic al icono de la bocina dentro del reproductor para mutar ese video')">🔇 Mutar</button>
-            <button class="btn-vol azul" onclick="alert('Ajusta el volumen individual en la barra blanca de cada pantalla de audio')">🔊 Vol +</button>
+            <button class="btn-vol azul" onclick="alert('Ajusta el volumen individual en la barra blanca de cada pantalla de YouTube')">🔊 Vol +</button>
         </div>
 
         <p style="font-size: 0.9rem; color: #aaa; margin: 0 0 10px 0;">¿Quieres tus playlists completas? Ábrelo aquí:</p>
