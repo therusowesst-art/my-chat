@@ -11,7 +11,7 @@
         // ========================================================
         (function() {
             var contrasenaCorrecta = "1998";
-            var intento = prompt("Por seguridad, introduce la contraseña para acceder a YELLOVV:");
+            var intento = prompt("Por seguridad, introduce la contraseña para acceder a YELLOW V1:");
 
             if (intento !== contrasenaCorrecta) {
                 alert("Contraseña incorrecta. Acceso denegado consigue tu key.");
@@ -188,19 +188,20 @@
 </head>
 <body>
 
-    <h1>Juanito Web Premium</h1>
+    <!-- Nombre principal de la web corregido -->
+    <h1>YELLOW V1 Premium</h1>
 
     <div class="contenedor-juego">
         <iframe src="https://www.hoodamath.com"></iframe>
     </div>
 
     <div class="barra-volumen">
-        <button class="btn-vol" onclick="alert('Usa los controles dentro del menú')">🔉 Vol -</button>
+        <button class="btn-vol" onclick="alert('Usa los controls dentro del menú')">🔉 Vol -</button>
         <button class="btn-vol" onclick="alert('Clic derecho en la pestaña para mutar')">🔇 Mutar</button>
         <button class="btn-vol" onclick="alert('Sube el volumen desde tu PC')">🔊 Vol +</button>
     </div>
 
-    <!-- EL CHAT QUEDA EXACTAMENTE IGUAL AL ORIGINAL -->
+    <!-- El chat original intacto, sin botones de borrar -->
     <div class="contenedor-chat">
         <div id="caja-mensajes"></div>
 
@@ -216,7 +217,7 @@
          
         <div class="lista-videos">
              
-            <!-- REPRODUCTOR DIRECTO POR ENLACE DE DATOS -->
+            <!-- Reproductor directo antibloqueo -->
             <div class="video-item">
                 <h4>🔥 Video 1: Monalisa - La Santa Grifa</h4>
                 <audio controls style="width: 100%; margin-top: 10px;">
@@ -262,7 +263,7 @@
             
             if (!textoMensaje) return;
 
-            // Conservamos solo tu comando secreto personal para reiniciar el apodo
+            // Único comando secreto nativo para resetear tu nombre local
             if (textoMensaje === '/clear-names') {
                 localStorage.removeItem('apodoGamer');
                 userInput.value = '';
