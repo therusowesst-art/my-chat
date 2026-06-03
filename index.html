@@ -188,7 +188,7 @@
 </head>
 <body>
 
-    <!-- Nombre principal de la web corregido -->
+    <!-- Nombre oficial corregido -->
     <h1>YELLOW V1 Premium</h1>
 
     <div class="contenedor-juego">
@@ -196,12 +196,12 @@
     </div>
 
     <div class="barra-volumen">
-        <button class="btn-vol" onclick="alert('Usa los controls dentro del menú')">🔉 Vol -</button>
+        <button class="btn-vol" onclick="alert('Usa los controles dentro del menú')">🔉 Vol -</button>
         <button class="btn-vol" onclick="alert('Clic derecho en la pestaña para mutar')">🔇 Mutar</button>
         <button class="btn-vol" onclick="alert('Sube el volumen desde tu PC')">🔊 Vol +</button>
     </div>
 
-    <!-- El chat original intacto, sin botones de borrar -->
+    <!-- Tu chat original intacto -->
     <div class="contenedor-chat">
         <div id="caja-mensajes"></div>
 
@@ -211,19 +211,32 @@
         </div>
     </div>
 
+    <!-- SECCIÓN DE MÚSICA COMPLETA RESTAURADA -->
     <div class="contenedor-musica">
         <h3 style="color: #7FDBFF; margin-top: 0; margin-bottom: 5px;">🎵 Radio & Lista Musical Premium</h3>
         <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Escucha música sin bloqueos escolares</p>
          
         <div class="lista-videos">
              
-            <!-- Reproductor directo antibloqueo -->
+            <!-- Video 1: Con el audio directo antibloqueo -->
             <div class="video-item">
                 <h4>🔥 Video 1: Monalisa - La Santa Grifa</h4>
                 <audio controls style="width: 100%; margin-top: 10px;">
                     <source src="https://pub-2f92d4a238714ff98da5bede66b44b11.r2.dev/Monalisa.mp3" type="audio/mpeg">
                     Tu navegador no soporta este reproductor.
                 </audio>
+            </div>
+
+            <!-- Video 2: Aquí pones el iframe de tu segundo video -->
+            <div class="video-item">
+                <h4>🔥 Video 2: Título de tu Video 2</h4>
+                <iframe class="video-iframe" src="ENLACE_DE_TU_VIDEO_2" allowfullscreen style="width: 100%; height: 200px;"></iframe>
+            </div>
+
+            <!-- Video 3: Aquí pones el iframe de tu tercer video -->
+            <div class="video-item">
+                <h4>🔥 Video 3: Título de tu Video 3</h4>
+                <iframe class="video-iframe" src="ENLACE_DE_TU_VIDEO_3" allowfullscreen style="width: 100%; height: 200px;"></iframe>
             </div>
 
         </div>
@@ -263,7 +276,6 @@
             
             if (!textoMensaje) return;
 
-            // Único comando secreto nativo para resetear tu nombre local
             if (textoMensaje === '/clear-names') {
                 localStorage.removeItem('apodoGamer');
                 userInput.value = '';
