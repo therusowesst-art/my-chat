@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Tareas - yellow WEB</title>
+    <title>Portal de Tareas - Herramientas de Estudio</title>
 
     <script>
         // ========================================================
-        // SISTEMA DE SEGURIDAD REFORZADO (Verificación Inicial)
+        // SISTEMA DE SEGURIDAD REFORZADO (Contraseña Ofuscada)
         // ========================================================
         (function() {
-            var contrasenaCorrecta = "1998";
+            // "MTk5OA==" es "1998" codificado en Base64 para que no sea visible a simple vista con F12
+            var llaveOculta = "MTk5OA=="; 
             var intento = prompt("Por seguridad académica, introduce tu código de acceso para verificar tu sesión:");
 
-            if (intento !== contrasenaCorrecta) {
-                alert("Código incorrecto. Redirigiendo al portal institucional.");
+            if (!intento || btoa(intento) !== llaveOculta) {
+                alert("Código incorrecto o expirado. Redirigiendo al portal institucional.");
                 window.location.replace("about:blank"); 
             } else {
                 alert("¡Sesión verificada correctamente!");
@@ -27,11 +28,9 @@
 
     <style>
         body {
-            /* Fondo negro sólido con una imagen de fondo (silueta de telaraña) optimizada con SVG */
             background-color: #000000;
+            /* Silueta de telaraña limpia optimizada con SVG en gris muy oscuro */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23222222' fill-opacity='0.4'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM10 0h2v100h-2zm2 0h2v100h-2zm4 0h2v100h-2zm2 0h2v100h-2zm50 0h2v100h-2zm2 0h2v100h-2zm4 0h2v100h-2zm2 0h2v100h-2z'/%3E%3C/g%3E%3C/svg%3E");
-            
-            /* Color de texto principal cambiado a Amarillo */
             color: #FFD700;
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
@@ -42,7 +41,7 @@
         h1 {
             color: #FFD700;
             text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             margin-bottom: 20px;
         }
 
@@ -62,6 +61,13 @@
             border: none;
             display: block;
             background: #000000;
+            /* Filtro inteligente: Reduce brillo y ajusta tonos para integrarse al fondo negro */
+            filter: brightness(0.85) contrast(1.1);
+            transition: 0.3s;
+        }
+
+        iframe:hover {
+            filter: brightness(1) contrast(1);
         }
 
         .barra-volumen {
@@ -93,6 +99,18 @@
             background: #FFD700;
             color: black;
             box-shadow: 0px 0px 10px #FFD700;
+        }
+
+        /* Botón de pánico/discreción */
+        .btn-discreto {
+            background: #222;
+            border-color: #aa8400;
+            color: #aa8400;
+            margin-bottom: 15px;
+        }
+        .btn-discreto:hover {
+            background: #aa8400;
+            color: black;
         }
 
         .contenedor-chat {
@@ -164,6 +182,18 @@
             border-radius: 12px;
             padding: 15px;
             box-sizing: border-box;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        /* Clase para ocultar dinámicamente la sección multimedia */
+        .oculto {
+            max-height: 0px !important;
+            padding: 0px !important;
+            margin: 0px auto !important;
+            border: none !important;
+            box-shadow: none !important;
+            opacity: 0;
         }
 
         .lista-videos {
@@ -228,6 +258,7 @@
         <button class="btn-vol" onclick="alert('Usa los controles internos para mitigar el volumen de salida.')">🔉 Vol -</button>
         <button class="btn-vol" onclick="alert('Usa las opciones de pestaña de tu terminal de navegación para silenciar.')">🔇 Mutar</button>
         <button class="btn-vol" onclick="alert('Incrementa el volumen nativo de tu hardware.')">🔊 Vol +</button>
+        <button class="btn-vol btn-discreto" onclick="alternarMusica()">👁️ Multimedia (On/Off)</button>
     </div>
 
     <div class="contenedor-chat">
@@ -239,7 +270,7 @@
         </div>
     </div>
 
-    <div class="contenedor-musica">
+    <div class="contenedor-musica" id="seccionMusica">
         <h3 style="color: #FFD700; margin-top: 0; margin-bottom: 5px;">🎵 Recursos de Audio Complementarios</h3>
         <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Lista de transmisiones disponibles</p>
          
@@ -285,7 +316,12 @@
     </div>
 
     <script>
-        // Configuración de base de datos original mantenida para la persistencia del chat
+        // Lógica para alternar visibilidad de la música de forma discreta
+        function alternarMusica() {
+            var el = document.getElementById("seccionMusica");
+            el.classList.toggle("oculto");
+        }
+
         const firebaseConfig = {
             apiKey: "AIzaSyDcLm48oGpY4-gF-VBPwOcfTSHniWQ_KSI",
             authDomain: "pagina-yellow.firebaseapp.com",
