@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yellow</title>
+    <title>Portal de Tareas - yellow WEB</title>
 
     <script>
         // ========================================================
-        // SISTEMA DE SEGURIDAD OBLIGATORIO (Al inicio del HEAD)
+        // SISTEMA DE SEGURIDAD REFORZADO (Verificación Inicial)
         // ========================================================
         (function() {
             var contrasenaCorrecta = "1998";
-            var intento = prompt("Por seguridad, introduce la contraseña para acceder a yellow web:");
+            var intento = prompt("Por seguridad académica, introduce tu código de acceso para verificar tu sesión:");
 
             if (intento !== contrasenaCorrecta) {
-                alert("Contraseña incorrecta. Acceso denegado consige tu key.");
-                window.location.replace("about:blank"); // Bloquea y limpia la pestaña
+                alert("Código incorrecto. Redirigiendo al portal institucional.");
+                window.location.replace("about:blank"); 
             } else {
-                alert("¡Acceso concedido! Bienvenido.");
+                alert("¡Sesión verificada correctamente!");
             }
         })();
     </script>
@@ -27,24 +27,28 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #001f3f, #0074D9);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Fondo negro sólido con una imagen de fondo (silueta de telaraña) optimizada con SVG */
+            background-color: #000000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23222222' fill-opacity='0.4'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM10 0h2v100h-2zm2 0h2v100h-2zm4 0h2v100h-2zm2 0h2v100h-2zm50 0h2v100h-2zm2 0h2v100h-2zm4 0h2v100h-2zm2 0h2v100h-2z'/%3E%3C/g%3E%3C/svg%3E");
+            
+            /* Color de texto principal cambiado a Amarillo */
+            color: #FFD700;
+            font-family: 'Courier New', Courier, monospace;
             text-align: center;
             margin: 0;
             padding: 20px;
         }
 
         h1 {
-            color: #FF4136;
-            text-shadow: 0px 0px 15px rgba(255, 65, 54, 0.8);
+            color: #FFD700;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
         .contenedor-juego {
-            border: 4px solid #FF4136;
-            box-shadow: 0px 0px 20px #FF4136;
+            border: 4px solid #FFD700;
+            box-shadow: 0px 0px 20px #FFD700;
             border-radius: 15px;
             overflow: hidden;
             max-width: 900px;
@@ -66,48 +70,37 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.9);
             padding: 8px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 65, 54, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .btn-vol {
             background: #111;
-            color: #fff;
-            border: 2px solid #FF4136;
+            color: #FFD700;
+            border: 2px solid #FFD700;
             padding: 6px 12px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.9rem;
-            box-shadow: 0px 0px 5px rgba(255, 65, 54, 0.5);
+            box-shadow: 0px 0px 5px rgba(255, 215, 0, 0.5);
         }
 
         .btn-vol:hover {
-            background: #FF4136;
+            background: #FFD700;
             color: black;
-            box-shadow: 0px 0px 10px #FF4136;
-        }
-
-        .btn-vol.azul {
-            border-color: #7FDBFF;
-            box-shadow: 0px 0px 5px rgba(127, 219, 255, 0.5);
-        }
-
-        .btn-vol.azul:hover {
-            background: #7FDBFF;
-            color: black;
-            box-shadow: 0px 0px 10px #7FDBFF;
+            box-shadow: 0px 0px 10px #FFD700;
         }
 
         .contenedor-chat {
             max-width: 800px;
             margin: 0 auto 20px auto;
-            background: rgba(0, 0, 0, 0.75);
-            border: 3px solid #FF4136;
-            box-shadow: 0px 0px 15px rgba(255, 65, 54, 0.5);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #FFD700;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
             border-radius: 12px;
             padding: 15px;
         }
@@ -115,7 +108,7 @@
         #caja-mensajes {
             height: 250px;
             overflow-y: auto;
-            border: 1px solid #FF4136;
+            border: 1px solid #FFD700;
             border-radius: 8px;
             padding: 10px;
             text-align: left;
@@ -130,12 +123,12 @@
         }
 
         .usuario {
-            color: #7FDBFF;
+            color: #FFFFFF;
             font-weight: bold;
         }
 
         .texto {
-            color: #FF4136;
+            color: #FFD700;
         }
 
         .controles {
@@ -145,7 +138,7 @@
 
         input {
             background: #111;
-            border: 2px solid #7FDBFF;
+            border: 2px solid #FFD700;
             color: white;
             padding: 10px;
             border-radius: 6px;
@@ -165,9 +158,9 @@
         .contenedor-musica {
             max-width: 800px;
             margin: 20px auto;
-            background: rgba(0,0,0,0.8);
-            border: 2px solid #7FDBFF;
-            box-shadow: 0px 0px 15px #7FDBFF;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #FFD700;
+            box-shadow: 0px 0px 15px #FFD700;
             border-radius: 12px;
             padding: 15px;
             box-sizing: border-box;
@@ -185,12 +178,12 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid rgba(127, 219, 255, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .video-item h4, .video-item h5 {
             margin: 0 0 8px 0;
-            color: #7FDBFF;
+            color: #FFD700;
             text-align: left;
             font-size: 1rem;
         }
@@ -201,96 +194,98 @@
             border-radius: 6px;
             border: none;
             display: block;
+            background: #000000;
         }
 
         .btn-yt-music {
             display: inline-block;
-            background: #FF4136;
-            color: white;
+            background: #FFD700;
+            color: black;
             text-decoration: none;
             padding: 10px 20px;
             font-weight: bold;
             border-radius: 6px;
-            box-shadow: 0px 0px 10px #FF4136;
+            box-shadow: 0px 0px 10px #FFD700;
             transition: 0.2s;
             margin-top: 5px;
         }
 
         .btn-yt-music:hover {
             transform: scale(1.05);
-            box-shadow: 0px 0px 15px #FF4136;
+            box-shadow: 0px 0px 15px #FFD700;
         }
     </style>
 </head>
 <body>
 
-    <h1>Yellow Web</h1>
+    <h1>Módulo de Red Integrado</h1>
 
     <div class="contenedor-juego">
         <iframe src="https://www.hoodamath.com"></iframe>
     </div>
 
     <div class="barra-volumen">
-        <button class="btn-vol" onclick="alert('Usa los controles dentro del menú del juego para bajar el volumen')">🔉 Vol -</button>
-        <button class="btn-vol" onclick="alert('Puedes mutar el juego desde la pestaña de tu navegador dándole clic derecho -> Silenciar sitio web')">🔇 Mutar</button>
-        <button class="btn-vol" onclick="alert('Aumenta el volumen general desde tu PC o el menú interno del juego')">🔊 Vol +</button>
+        <button class="btn-vol" onclick="alert('Usa los controles internos para mitigar el volumen de salida.')">🔉 Vol -</button>
+        <button class="btn-vol" onclick="alert('Usa las opciones de pestaña de tu terminal de navegación para silenciar.')">🔇 Mutar</button>
+        <button class="btn-vol" onclick="alert('Incrementa el volumen nativo de tu hardware.')">🔊 Vol +</button>
     </div>
 
     <div class="contenedor-chat">
         <div id="caja-mensajes"></div>
 
         <div class="controles">
-            <input type="text" id="userInput" placeholder="Tu Apodo...">
-            <input type="text" id="textInput" placeholder="Escribe tu mensaje aquí y presiona Enter...">
+            <input type="text" id="userInput" placeholder="Identificador...">
+            <input type="text" id="textInput" placeholder="Entrada de datos de chat...">
         </div>
     </div>
 
     <div class="contenedor-musica">
-        <h3 style="color: #7FDBFF; margin-top: 0; margin-bottom: 5px;">🎵 Radio & Lista Musical Premium</h3>
-        <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Disfruta de tus temas favoritos uno debajo del otro</p>
+        <h3 style="color: #FFD700; margin-top: 0; margin-bottom: 5px;">🎵 Recursos de Audio Complementarios</h3>
+        <p style="font-size: 0.85rem; color: #aaa; margin: 0;">Lista de transmisiones disponibles</p>
          
         <div class="lista-videos">
              
             <div class="video-item">
-                <h4>🔥 Video 1</h4>
+                <h4>🔥 Transmisión 1</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/UaFCPHwZMpI" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
-                <h4>🔥 Video 2</h4>
+                <h4>🔥 Transmisión 2</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/SFVQkYTE5xQ" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
-                <h4>🔥 Video 3</h4>
+                <h4>🔥 Transmisión 3</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/Vee0Wth6Iws" allowfullscreen></iframe>
             </div>
 
             <div class="video-item">
-                <h4>🔥 Video 4</h4>
+                <h4>🔥 Transmisión 4</h4>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/Z6NzwMif0fA" allowfullscreen></iframe>
             </div>
 
              <div class="video-item">
-                <h5>🔥 Video 1</h5>
+                <h5>🔥 Transmisión 5</h5>
                 <iframe class="video-iframe" src="https://www.youtube.com/embed/c3YOJ4jBMrg" allowfullscreen></iframe>
             </div>
 
         </div>
 
-        <div class="barra-volumen" style="border-color: rgba(127, 219, 255, 0.3); margin-bottom: 15px;">
-            <button class="btn-vol azul" onclick="alert('Usa la barra de volumen nativa que aparece abajo de cada reproductor')">🔉 Vol -</button>
-            <button class="btn-vol azul" onclick="alert('Dale clic al icono de la bocina dentro del reproductor para mutar ese video')">🔇 Mutar</button>
-            <button class="btn-vol azul" onclick="alert('Ajusta el volumen individual en la barra blanca de cada pantalla de YouTube')">🔊 Vol +</button>
+        <div class="barra-volumen" style="border-color: rgba(255, 215, 0, 0.3); margin-bottom: 15px;">
+            <button class="btn-vol" onclick="alert('Modifica los niveles desde la barra del reproductor')">🔉 Vol -</button>
+            <button class="btn-vol" onclick="alert('Selecciona el icono de audio en el visor multimedia')">🔇 Mutar</button>
+            <button class="btn-vol" onclick="alert('Sube el nivel directamente en el elemento multimedia')">🔊 Vol +</button>
         </div>
 
-        <p style="font-size: 0.9rem; color: #aaa; margin: 0 0 10px 0;">¿Quieres tus playlists completas? Ábrelo aquí:</p>
+        <p style="font-size: 0.9rem; color: #aaa; margin: 0 0 10px 0;">Acceso a plataformas de audio externas:</p>
         <a href="https://music.youtube.com" target="_blank" class="btn-yt-music">
-            🚀 Abrir YouTube Music Oficial
+            🚀 Enlace Externo Oficial
         </a>
     </div>
 
     <script>
+        // Configuración de base de datos original mantenida para la persistencia del chat
         const firebaseConfig = {
             apiKey: "AIzaSyDcLm48oGpY4-gF-VBPwOcfTSHniWQ_KSI",
             authDomain: "pagina-yellow.firebaseapp.com",
