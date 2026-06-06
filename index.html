@@ -34,7 +34,7 @@
             z-index: 1;
         }
 
-        /* Contenedor de la interfaz HUD (Estilo Sci-Fi/Hack) */
+        /* Contenedor de la interfaz HUD */
         .hud-container {
             position: absolute;
             top: 0;
@@ -42,7 +42,7 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-            pointer-events: none; /* Deja pasar los clicks al canvas */
+            pointer-events: none; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -65,13 +65,14 @@
             animation: parpadeo 1.5s infinite;
         }
 
-        /* Paneles Laterales: Los 3 Pilares de IMPERY */
+        /* Área Central: Paneles y el Buscador */
         .hud-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-grow: 1;
             width: 100%;
+            position: relative;
         }
         .panel {
             background: rgba(0, 0, 0, 0.6);
@@ -83,7 +84,7 @@
             width: 280px;
             backdrop-filter: blur(8px);
             border-radius: 0 6px 6px 0;
-            pointer-events: auto; /* Permite interactuar con los paneles */
+            pointer-events: auto; 
             transition: all 0.3s ease;
         }
         .panel:hover {
@@ -110,7 +111,98 @@
             color: #ffffff;
         }
 
-        /* Barra Inferior: Tu aporte de Hardware */
+        /* --- NUEVO SECTOR DEL BUSCADOR INDEPENDIENTE --- */
+        .search-center {
+            position: absolute;
+            top: 70%; /* Ubicado debajo del título central */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            pointer-events: auto;
+            z-index: 5;
+        }
+        .search-box {
+            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .search-box:focus-within {
+            border-color: #00e1ff;
+            box-shadow: 0 0 15px rgba(0, 225, 255, 0.2);
+        }
+        .search-box input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 14px 20px;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+        }
+        .search-box button {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            color: #00e1ff;
+            padding: 0 25px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .search-box button:hover {
+            background: #00e1ff;
+            color: #000000;
+        }
+        
+        /* Contenedor de Resultados del Ranking */
+        .results-box {
+            background: rgba(5, 5, 8, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            display: none; /* Oculto hasta que haya búsquedas */
+        }
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+        }
+        .result-item:last-child { border-bottom: none; }
+        .result-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .result-item a {
+            color: #00e1ff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .result-item a:hover { text-decoration: underline; }
+        .result-item span {
+            font-size: 10px;
+            color: #55555d;
+            display: block;
+        }
+        .result-score {
+            color: #00ff66 !important;
+            float: right;
+            font-size: 10px;
+        }
+
+        /* Barra Inferior */
         .hud-footer {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -134,7 +226,6 @@
             font-weight: 600;
         }
 
-        /* Animación de parpadeo para simular red viva */
         @keyframes parpadeo {
             0% { opacity: 0.3; }
             50% { opacity: 1; }
@@ -168,9 +259,17 @@
                 </div>
             </div>
 
+            <div class="search-center">
+                <div class="search-box">
+                    <input type="text" id="inputBusqueda" placeholder="Buscar en la red libre de IMPERY... (ej: minecraft)">
+                    <button id="btnBuscar">BUSCAR</button>
+                </div>
+                <div class="results-box" id="cajaResultados"></div>
+            </div>
+
             <div class="panel" style="border-radius: 6px 0 0 6px; border-left: 1px solid rgba(255,255,255,0.1); border-right: 3px solid #ffffff;">
                 <h3>3. IMMORTAL HOSTING</h3>
-                <p>Sitios web distribuidos de forma redundante entre navegadores Peer-to-Peer. Peticiones inmunes a la censura.</p>
+                <p>Sitios web distribuidos de forma redundante entre navegadores Peer-to-Peer.</p>
                 <div class="metric" style="color: #00ff66;">ACTIVE</div>
             </div>
         </div>
@@ -217,15 +316,12 @@
                 this.vy = (Math.random() - 0.5) * 1.2; 
                 this.radio = Math.random() * 2 + 1;
             }
-
             actualizar() {
                 this.x += this.vx;
                 this.y += this.vy;
-
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-                // Atracción física sutil hacia el cursor
                 const dx = mouseX - this.x;
                 const dy = mouseY - this.y;
                 const distancia = Math.sqrt(dx * dx + dy * dy);
@@ -234,7 +330,6 @@
                     this.y += dy * 0.008;
                 }
             }
-
             dibujar() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radio, 0, Math.PI * 2);
@@ -253,7 +348,6 @@
                     const dx = particulas[i].x - particulas[j].x;
                     const dy = particulas[i].y - particulas[j].y;
                     const distancia = Math.sqrt(dx * dx + dy * dy);
-
                     if (distancia < 130) {
                         ctx.beginPath();
                         ctx.moveTo(particulas[i].x, particulas[i].y);
@@ -269,17 +363,16 @@
         function animarColmena() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Red de nodos
             particulas.forEach(p => {
                 p.actualizar();
                 p.dibujar();
             });
             conectarNodos();
 
-            // Renderizar IMPERY estilo Chicano/Urbano interactivo
+            // Renderizar IMPERY centrado más arriba del buscador
             const texto = "IMPERY";
             const x = canvas.width / 2; 
-            const y = canvas.height / 2; 
+            const y = canvas.height / 2 - 80; // Subido ligeramente para balancear la UI
 
             ctx.font = "140px 'Permanent Marker', sans-serif";
             ctx.textAlign = "center";
@@ -291,27 +384,19 @@
             const dx = progX * maxDesv;
             const dy = progY * maxDesv;
 
-            // Capas sólidas para relieve 3D pesado
             ctx.fillStyle = "#0f0f12"; 
             for (let i = 0; i < 38; i++) {
                 ctx.fillText(texto, x - (dx * (i / 38)), y - (dy * (i / 38)));
             }
-
-            // Delineado del bloque
             ctx.strokeStyle = "#000000";
             ctx.lineWidth = 16;
             ctx.strokeText(texto, x - dx, y - dy);
-
-            // Cara superior blanca
             ctx.fillStyle = "#ffffff";
             ctx.fillText(texto, x, y);
-
-            // Delineado frontal
             ctx.strokeStyle = "#000000";
             ctx.lineWidth = 6;
             ctx.strokeText(texto, x, y);
 
-            // --- ANIMACIÓN DE NÚMEROS EN TIEMPO REAL (Para el efecto hacker) ---
             if (Math.random() > 0.95) {
                 document.getElementById('global-nodes').innerText = (142581 + Math.floor(Math.random() * 20 - 10)).toLocaleString();
                 document.getElementById('ai-speed').innerText = (2418 + Math.floor(Math.random() * 40 - 20)).toLocaleString() + " T/s";
@@ -326,7 +411,54 @@
             canvas.height = window.innerHeight;
         });
 
-        // Asegurar la fuente antes de pintar
+        // ==========================================
+        // LÓGICA DE CONEXIÓN CON EL MOTOR DE BÚSQUEDA
+        // ==========================================
+        const inputBusqueda = document.getElementById('inputBusqueda');
+        const btnBuscar = document.getElementById('btnBuscar');
+        const cajaResultados = document.getElementById('cajaResultados');
+
+        async function ejecutarBusqueda() {
+            const query = inputBusqueda.value.trim();
+            if (!query) return;
+
+            try {
+                // Hacemos una consulta asíncrona a nuestro script motor.js en el puerto 3000
+                const respuesta = await fetch(`http://localhost:3000/buscar?q=${encodeURIComponent(query)}`);
+                const resultados = await respuesta.json();
+
+                // Limpiamos los resultados anteriores
+                cajaResultados.innerHTML = '';
+
+                if (resultados.length === 0) {
+                    cajaResultados.innerHTML = '<div class="result-item"><span>No se encontraron resultados independientes en el índice.</span></div>';
+                } else {
+                    // Pintamos cada resultado clasificado por el ranking
+                    resultados.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'result-item';
+                        div.innerHTML = `
+                            <span class="result-score">SCORE: ${(item.score * 1000).toFixed(2)}</span>
+                            <a href="${item.url}" target="_blank">${item.titulo}</a>
+                            <span>${item.url}</span>
+                        `;
+                        cajaResultados.appendChild(div);
+                    });
+                }
+                cajaResultados.style.display = 'block'; // Mostramos la caja
+            } catch (error) {
+                console.error("Error al conectar con el motor IMPERY:", error);
+                cajaResultados.innerHTML = '<div class="result-item"><span style="color:#ff3333;">ERROR: El motor.js está desconectado en la terminal.</span></div>';
+                cajaResultados.style.display = 'block';
+            }
+        }
+
+        // Eventos para activar la búsqueda
+        btnBuscar.addEventListener('click', ejecutarBusqueda);
+        inputBusqueda.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') ejecutarBusqueda();
+        });
+
         document.fonts.ready.then(() => {
             animarColmena();
         });
